@@ -16,9 +16,39 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
+  wire reset = ! rst_n;
+  
+  reg [20 : 0] counter;
+  reg [20 : 0] signal_counter;
+  reg [7: 0] signal;
+  assign uio_oe = 8'b11111111;
+  assign uio_out[7] = signal < ui_in | counter > (MAX_COUNT - MAX_SIG * DEC_BASE);
+  assign uio_out[6 : 0] = 0;
+  assign uo_out[7] = 0;
 
+ seg7 #(.BASE(DEC_BASE)) seg7 (.counter(ui_in), .segments(uo_out[6:0]));
+
+  always @(posedge clk) begin
+    if(reset) begin
+      counter <= 0;
+      signal <= 0;
+      signal_counter <= 0;
+    end else begin
+      if(counter > MAX_COUNT) begin
+          counter <= 0;
+          signal <= 0;
+          signal_counter <= 0;
+      end else begin
+        counter <= counter + 1;
+        if(signal_counter > MAX_SIG) begin
+          signal_counter <= 0;
+          if(signal < ui_in) begin
+            signal <= signal + 1;
+          end
+        end else begin
+          signal_counter <= signal_counter + 1;
+        end
+      end
+    end
+  end
 endmodule
