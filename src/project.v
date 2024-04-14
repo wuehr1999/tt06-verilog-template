@@ -40,7 +40,7 @@ module tt_um_wuehr1999_servotester #( parameter MAX_COUNT = 200000, parameter MA
       end
     end
 */
-always @(posedge clk) begin
+  always @(posedge clk) begin
     if(reset) begin
       counter <= 0;
       signal <= 0;
@@ -50,18 +50,18 @@ always @(posedge clk) begin
           counter <= 0;
           signal <= 0;
           signal_counter <= 0;
-       end else begin
-           counter <= counter + 1;
-           if(signal_counter > MAX_SIG) begin
-              signal_counter <= 0;
-           if(signal < ui_in) begin
-              signal <= signal + 1;
-           end
+      end else begin
+        counter <= counter + 1;
+        if(signal_counter > MAX_SIG) begin
+          signal_counter <= 0;
+          if(signal < ui_in) begin
+            signal <= signal + 1;
+          end
+        end else begin
+          signal_counter <= signal_counter + 1;
         end
-     end else begin
-        signal_counter <= signal_counter + 1;
-     end
-   end
+      end
+    end
   end
 endmodule
 
