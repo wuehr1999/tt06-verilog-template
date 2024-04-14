@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+It uses a 10 MHz clock to create a counter, which has it's carry signal every 50Hz. Then there is a second counter to create the 1 - 2 millisecond high signal according to the user input.
 
 ## How to test
 
-Explain how to use your project
+Connect a servo PWM signal to biderectional pin 7. According to the user input on the inputs it's position will change and be indicated on the 7-segment display.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+A RC servo is required for testing.
