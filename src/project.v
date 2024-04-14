@@ -17,7 +17,7 @@ module tt_um_wuehr1999_servotester #( parameter MAX_COUNT = 200000, parameter MA
 );
 
   wire reset = ! rst_n;
-  
+  /*
   reg [20 : 0] counter;
   reg [20 : 0] signal_counter;
   reg [7: 0] signal;
@@ -38,7 +38,7 @@ module tt_um_wuehr1999_servotester #( parameter MAX_COUNT = 200000, parameter MA
         uo_out = 7'b0000100;
       end
     end
-
+*/
   always @(posedge clk) begin
     if(reset) begin
       counter <= 0;
