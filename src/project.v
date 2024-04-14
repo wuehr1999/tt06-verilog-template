@@ -25,8 +25,19 @@ module tt_um_wuehr1999_servotester #( parameter MAX_COUNT = 200000, parameter MA
   assign uio_out[7] = signal < ui_in | counter > (MAX_COUNT - MAX_SIG * DEC_BASE);
   assign uio_out[6 : 0] = 0;
   assign uo_out[7] = 0;
-
- seg7 #(.BASE(DEC_BASE)) seg7 (.counter(ui_in), .segments(uo_out[6:0]));
+    always @(*) begin
+      if(ui_in < BASE) begin
+        uo_out = 7'b0010000;
+      end else if(ui_in < 2 * BASE) begin
+        uo_out = 7'b0100000;
+      end else if(ui_in < 3 * BASE) begin
+        uo_out = 7'b0000001;
+      end else if(ui_in < 4 * BASE) begin
+        uo_out = 7'b0000010;
+      end else begin
+        uo_out = 7'b0000100;
+      end
+    end
 
   always @(posedge clk) begin
     if(reset) begin
