@@ -24,7 +24,7 @@ module tt_um_wuehr1999_servotester #( parameter MAX_COUNT = 200000, parameter MA
   assign uio_oe = 8'b11111111;
   assign uio_out[7] = signal < ui_in | counter > (MAX_COUNT - MAX_SIG * DEC_BASE);
   assign uio_out[6 : 0] = 0;
-  assign uo_out[7] = 0;
+ /* assign uo_out[7] = 0;
   always @* begin
       if(ui_in < DEC_BASE) begin
         uo_out = 7'b0010000;
@@ -38,7 +38,7 @@ module tt_um_wuehr1999_servotester #( parameter MAX_COUNT = 200000, parameter MA
         uo_out = 7'b0000100;
       end
     end
-
+*/
     always @(posedge clk) begin
     if(reset) begin
       counter <= 0;
