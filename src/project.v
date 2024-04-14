@@ -56,6 +56,7 @@ always @(posedge clk) begin
               signal_counter <= 0;
            if(signal < ui_in) begin
               signal <= signal + 1;
+           end
         end
      end else begin
         signal_counter <= signal_counter + 1;
